@@ -38,6 +38,7 @@
         (select count(*) from t_question where courseId = c.id) questionQty
         from t_course c
         <include refid="select_where"></include>
+        limit #{offset}, #{pageSize}
     </select>
 
     <!-- 更新学科信息 -->
