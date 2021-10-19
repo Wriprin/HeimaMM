@@ -41,7 +41,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             // 校验&登录失败
-            JsonUtils.printResult(response, new Result(true, e.getMessage()));
+            JsonUtils.printResult(response, new Result(false, e.getMessage()));
         }
     }
 

@@ -29,6 +29,7 @@
         <include refid="select_where"></include>
     </select>
 
+    <!-- 分页查询每页结果 -->
     <select id="findListByPage" parameterType="QueryPageBean" resultType="Course">
         select id, name, createDate, isShow,
         (select username from t_user where id = c.userId) creator,
