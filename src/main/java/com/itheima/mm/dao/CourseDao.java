@@ -36,4 +36,10 @@ public interface CourseDao {
      * @param course
      */
     void update(Course course);
+
+    /**
+     * 删除指定 id 的学科信息
+     * @param id
+     */
+    void delete(Integer id);
 }

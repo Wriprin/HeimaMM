@@ -44,4 +44,10 @@
     <update id="update" parameterType="Course">
         update t_course set name = #{name}, isShow = #{isShow} where id = #{id}
     </update>
+
+    <!-- 删除指定 id 的学科信息 -->
+    <delete id="delete" parameterType="int">
+        delete from t_course where id = #{id}
+    </delete>
+
 </mapper>

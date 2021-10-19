@@ -104,5 +104,26 @@ public class CourseController {
 
     }
 
+    /**
+     * 删除指定学科
+     */
+    @RequestMapping("/course/delete")
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            // 获取请求参数 id
+            Integer id = Integer.valueOf(request.getParameter("id"));
+
+            // 调用 业务层，删除指定 id 的学科
+            courseService.delete(id);
+
+            // 删除成功，响应
+            JsonUtils.printResult(response, new Result(true, "删除成功"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 删除失败
+            JsonUtils.printResult(response, new Result(false, e.getMessage()));
+        }
+    }
 
 }
