@@ -43,7 +43,17 @@ public class UserController {
             // 校验&登录失败
             JsonUtils.printResult(response, new Result(true, e.getMessage()));
         }
+    }
 
+    /**
+     * 后台用户退出登录
+     */
+    @RequestMapping("/user/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // 销毁 session
+        request.getSession().invalidate();
+
+        JsonUtils.printResult(response, new Result(true, "退出成功"));
     }
 
 }
