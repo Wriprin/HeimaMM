@@ -82,5 +82,27 @@ public class CourseController {
 
     }
 
+    /**
+     * 更新学科信息
+     */
+    @RequestMapping("/course/update")
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            // 获取请求参数，封装到 course 对象中
+            Course course = JsonUtils.parseJSON2Object(request, Course.class);
+
+            // 调用 业务层，更新学科信息
+            courseService.update(course);
+
+            // 更新成功，响应
+            JsonUtils.printResult(response, new Result(true, "更新学科成功"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 更新失败
+            JsonUtils.printResult(response, new Result(false, "更新学科失败"));
+        }
+
+    }
+
 
 }

@@ -51,4 +51,17 @@ public class CourseService {
 
         return pageResult;
     }
+
+    /**
+     * 更新学科信息
+     * @param course
+     */
+    public void update(Course course) throws Exception {
+        SqlSession sqlSession = SqlSessionFactoryUtils.openSqlSession();
+        CourseDao courseDao = sqlSession.getMapper(CourseDao.class);
+
+        courseDao.update(course);
+
+        SqlSessionFactoryUtils.commitAndClose(sqlSession);
+    }
 }

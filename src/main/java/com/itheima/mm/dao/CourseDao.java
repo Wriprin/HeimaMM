@@ -30,4 +30,10 @@ public interface CourseDao {
      * @return
      */
     List<Course> findListByPage(QueryPageBean queryPageBean);
+
+    /**
+     * 更新学科信息
+     * @param course
+     */
+    void update(Course course);
 }

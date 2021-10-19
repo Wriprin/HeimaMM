@@ -39,4 +39,9 @@
         from t_course c
         <include refid="select_where"></include>
     </select>
+
+    <!-- 更新学科信息 -->
+    <update id="update" parameterType="Course">
+        update t_course set name = #{name}, isShow = #{isShow} where id = #{id}
+    </update>
 </mapper>
