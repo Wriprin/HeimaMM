@@ -64,7 +64,7 @@
     </resultMap>
 
     <!-- 查询所有学科 -->
-    <select id="findAll" parameterType="int" resultType="Course">
+    <select id="findAll" parameterType="int" resultMap="courseCatalogMap">
         select id, name from t_course
          <where>
              <if test="status != null and status != '' and status != 'null'">
