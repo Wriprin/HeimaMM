@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: wriprin
@@ -124,6 +125,29 @@ public class CourseController {
             // 删除失败
             JsonUtils.printResult(response, new Result(false, e.getMessage()));
         }
+    }
+
+    /**
+     * 查询所有学科
+     */
+    @RequestMapping("/course/findAll")
+    public void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            // 接受请求参数, status
+            Integer status = Integer.valueOf(request.getParameter("status"));
+
+            // 调用 业务层，查询相关信息
+            List<Course> courseList = courseService.findAll(status);
+
+            // 查询成功
+            JsonUtils.printResult(response, new Result(true, "查询 学科 列表成功", courseList));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 查询失败
+            JsonUtils.printResult(response, new Result(false, "查询 学科 列表失败"));
+        }
+
     }
 
 }

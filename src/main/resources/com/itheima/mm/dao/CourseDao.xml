@@ -51,4 +51,25 @@
         delete from t_course where id = #{id}
     </delete>
 
+
+    <!-- 一对多 分布查询 映射 -->
+    <resultMap id="courseCatalogMap" type="Course">
+        <!-- id 字段单独进行映射是因为，在引用外部查询时，需要 将 id 作为查询条件 -->
+        <id property="id" column="id"></id>
+        <!-- t_course 其它字段可以一一映射就不单独进行映射配置 -->
+
+        <!-- 一对多 使用 collection 标签 -->
+        <collection property="catalogList" ofType="Catalog" column="id" select="com.itheima.mm.dao.CatalogDao.findIdNameByCourseId"></collection>
+
+    </resultMap>
+
+    <!-- 查询所有学科 -->
+    <select id="findAll" parameterType="int" resultType="Course">
+        select id, name from t_course
+         <where>
+             <if test="status != null and status != '' and status != 'null'">
+                isShow = #{status}
+             </if>
+         </where>
+    </select>
 </mapper>

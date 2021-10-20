@@ -191,91 +191,31 @@
 
 					// 必传参数
 					let params = {
+						// status: 0 表示要查询的是显示的学科列表
 						status: 0
 					};
 					console.log("学科下拉列表请求参数：");
 					console.log(params);
 
-					let response = {
-						data:{
-							"flag": true,
-							"message": "获取列表成功",
-							"result": [
-								{
-									"catalogList": [
-										{
-											"id": 1,
-											"name": "Java基础"
-										},
-										{
-											"id": 2,
-											"name": "JavaWeb"
-										},
-										{
-											"id": 3,
-											"name": "Spring MVC"
-										},
-										{
-											"id": 4,
-											"name": "Spring boot"
-										},
-										{
-											"id": 8,
-											"name": "进程线程"
-										},
-										{
-											"id": 13,
-											"name": "aaaa"
-										}
-									],
-									"id": 1,
-									"name": "Java"
-								},
-								{
-									"catalogList": [
-										{
-											"id": 5,
-											"name": "Python基础"
-										},
-										{
-											"id": 6,
-											"name": "函数编程"
-										},
-										{
-											"id": 7,
-											"name": "面向对象编程"
-										}
-									],
-									"id": 2,
-									"name": "Python"
-								},
-								{
-									"catalogList": [],
-									"id": 3,
-									"name": "大数据"
-								},
-								{
-									"catalogList": [],
-									"id": 4,
-									"name": "Php"
-								},
-								{
-									"catalogList": [],
-									"id": 8,
-									"name": "888"
-								},
-								{
-									"catalogList": [],
-									"id": 9,
-									"name": "2"
-								}
-							]
+					// 发送异步请求
+					axios.get("/course/findAll.do?status="+params.status).then(response=>{
+						if (response.data.flag) {
+							// 查询成功
+							this.courses = response.data.result;
+							this.$message({
+							    type:"success",
+							    message:response.data.message,
+							    showClose:true
+							})
+						} else {
+							// 查询失败
+							this.$message({
+							    type:"error",
+							    message:response.data.message,
+							    showClose:true
+							})
 						}
-					}
-
-					t.courses =response.data.result;
-
-
+					})
 
 				},
 				// 试题分页列表

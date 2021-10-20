@@ -106,4 +106,20 @@ public class CourseService {
             SqlSessionFactoryUtils.commitAndClose(sqlSession);
         }
     }
+
+    /**
+     * 查询所有学科
+     * @param status
+     * @return
+     */
+    public List<Course> findAll(Integer status) throws Exception {
+        SqlSession sqlSession = SqlSessionFactoryUtils.openSqlSession();
+        CourseDao courseDao = sqlSession.getMapper(CourseDao.class);
+
+        List<Course> courseList = courseDao.findAll(status);
+
+        SqlSessionFactoryUtils.commitAndClose(sqlSession);
+
+        return courseList;
+    }
 }

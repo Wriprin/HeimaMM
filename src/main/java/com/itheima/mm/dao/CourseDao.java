@@ -42,4 +42,11 @@ public interface CourseDao {
      * @param id
      */
     void delete(Integer id);
+
+    /**
+     * 查询所有学科
+     * @param status
+     * @return
+     */
+    List<Course> findAll(Integer status);
 }

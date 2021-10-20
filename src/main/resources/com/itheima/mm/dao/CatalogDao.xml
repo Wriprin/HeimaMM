@@ -7,4 +7,11 @@
     <select id="findById" parameterType="int" resultType="long">
         select count(*) from t_catalog where courseId = #{id}
     </select>
+
+    <!-- 根据 course.id 查询 关联二级目录 id 和 name -->
+    <select id="findIdNameByCourseId" parameterType="int" resultType="Catalog">
+        select id, name from t_catalog where courseId = #{id}
+    </select>
+
+
 </mapper>
