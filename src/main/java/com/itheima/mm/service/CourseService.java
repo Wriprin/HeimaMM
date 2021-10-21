@@ -112,7 +112,7 @@ public class CourseService {
      * @param status
      * @return
      */
-    public List<Course> findAll(Integer status) throws Exception {
+    public List<Course> findAll(String status) throws Exception {
         SqlSession sqlSession = SqlSessionFactoryUtils.openSqlSession();
         CourseDao courseDao = sqlSession.getMapper(CourseDao.class);
 

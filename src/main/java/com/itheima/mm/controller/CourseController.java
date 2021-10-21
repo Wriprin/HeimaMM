@@ -134,7 +134,7 @@ public class CourseController {
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // 接受请求参数, status
-            Integer status = Integer.valueOf(request.getParameter("status"));
+            String status = request.getParameter("status");
 
             // 调用 业务层，查询相关信息
             List<Course> courseList = courseService.findAll(status);

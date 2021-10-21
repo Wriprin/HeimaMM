@@ -48,5 +48,5 @@ public interface CourseDao {
      * @param status
      * @return
      */
-    List<Course> findAll(Integer status);
+    List<Course> findAll(String status);
 }

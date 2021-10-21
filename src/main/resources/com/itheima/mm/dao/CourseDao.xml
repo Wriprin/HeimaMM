@@ -61,10 +61,12 @@
         <!-- 一对多 使用 collection 标签 -->
         <collection property="catalogList" ofType="Catalog" column="id" select="com.itheima.mm.dao.CatalogDao.findIdNameByCourseId"></collection>
 
+        <collection property="tagList" ofType="Tag" column="id" select="com.itheima.mm.dao.TagDao.findIdNameByCourseId"></collection>
+
     </resultMap>
 
     <!-- 查询所有学科 -->
-    <select id="findAll" parameterType="int" resultMap="courseCatalogMap">
+    <select id="findAll" parameterType="string" resultMap="courseCatalogMap">
         select id, name from t_course
          <where>
              <if test="status != null and status != '' and status != 'null'">

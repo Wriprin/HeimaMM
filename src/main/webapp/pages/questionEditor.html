@@ -478,102 +478,18 @@
             },
             // 学科下拉列表
             initCourses() {
-                let t = this;
-                let response = {
-                    data:{
-                        "flag": true,
-                        "message": "获取列表成功",
-                        "result": [
-                            {
-                                "catalogList": [
-                                    {
-                                        "id": 1,
-                                        "name": "Java基础"
-                                    },
-                                    {
-                                        "id": 2,
-                                        "name": "JavaWeb"
-                                    },
-                                    {
-                                        "id": 3,
-                                        "name": "Spring MVC"
-                                    },
-                                    {
-                                        "id": 4,
-                                        "name": "Spring boot"
-                                    },
-                                    {
-                                        "id": 8,
-                                        "name": "进程线程"
-                                    },
-                                    {
-                                        "id": 13,
-                                        "name": "aaaa"
-                                    }
-                                ],
-                                "tagList": [
-                                    {
-                                        "id": 1,
-                                        "name": "String字符串"
-                                    },
-                                    {
-                                        "id": 2,
-                                        "name": "Java类与对象"
-                                    },
-                                    {
-                                        "id": 3,
-                                        "name": "Servlet"
-                                    },
-                                    {
-                                        "id": 4,
-                                        "name": "多线程"
-                                    }
-                                ],
-                                "id": 1,
-                                "name": "Java"
-                            },
-                            {
-                                "catalogList": [
-                                    {
-                                        "id": 5,
-                                        "name": "Python基础"
-                                    },
-                                    {
-                                        "id": 6,
-                                        "name": "函数编程"
-                                    },
-                                    {
-                                        "id": 7,
-                                        "name": "面向对象编程"
-                                    }
-                                ],
-                                "id": 2,
-                                "name": "Python"
-                            },
-                            {
-                                "catalogList": [],
-                                "id": 3,
-                                "name": "大数据"
-                            },
-                            {
-                                "catalogList": [],
-                                "id": 4,
-                                "name": "Php"
-                            },
-                            {
-                                "catalogList": [],
-                                "id": 8,
-                                "name": "888"
-                            },
-                            {
-                                "catalogList": [],
-                                "id": 9,
-                                "name": "2"
-                            }
-                        ]
+                axios.get("/course/findAll.do").then(response=>{
+                    if (response.data.flag) {
+                        // 查询成功
+                        this.courses = response.data.result
+                    } else {
+                        this.$message({
+                            type:"error",
+                            message:response.data.message,
+                            showClose:true
+                        })
                     }
-                }
-                t.courses = response.data.result;
+                })
             },
             changeCourse() {
                 let courseId = this.formData.courseId;
