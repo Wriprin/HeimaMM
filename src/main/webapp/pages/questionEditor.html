@@ -745,7 +745,30 @@
 
                 let formData = new FormData();
                 formData.append(file.name, file);
-                let response = {};
+
+                // 发送异步请求，上传图片，并回显
+                axios.post("/common/uploadFile.do", formData).then(response=>{
+                    if (response.data.flag) {
+                        // 上传成功
+                        this.$message({
+                            type:"success",
+                            message:response.data.message,
+                            showClose:true
+                        })
+
+                        // 回显图片
+                        this.formData.questionItemList[index].imgUrl = response.data.result
+
+                    } else {
+                        // 上传失败
+                        this.$message({
+                            type:"error",
+                            message:response.data.message,
+                            showClose:true
+                        })
+                    }
+                })
+
             },
             // 提交表单
             createItem() {

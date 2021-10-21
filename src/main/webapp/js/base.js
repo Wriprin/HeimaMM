@@ -1,4 +1,4 @@
-var app_path = "/mm";
+var app_path = "";
 var app_url = "http://localhost:8080/mm";
 var base = {
 	"isDis": [{
