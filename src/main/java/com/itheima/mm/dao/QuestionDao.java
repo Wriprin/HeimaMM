@@ -2,8 +2,10 @@ package com.itheima.mm.dao;
 
 import com.itheima.mm.entry.QueryPageBean;
 import com.itheima.mm.pojo.Question;
+import com.itheima.mm.pojo.Tag;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: wriprin
@@ -32,4 +34,15 @@ public interface QuestionDao {
      */
     List<Question> findBasicListCount(QueryPageBean queryPageBean);
 
+    /**
+     * 添加基础试题
+     * @param question
+     */
+    void addBasicQuestion(Question question);
+
+    /**
+     * 添加题目关联标签
+     * @param tagMap
+     */
+    void addQuestionTag(Map tagMap);
 }

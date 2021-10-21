@@ -808,18 +808,39 @@
 					}
                 });
                 formData.tagList = tagList;
+
                 console.log("新增更新题库请求参数：");
                 console.log(this.formData);
-                this.$message.success("操作成功");
+
+                // 发送异步请求，请求添加试题
+                axios.post("/question/addBasicQuestion.do", formData).then(response=>{
+                    if (response.data.flag) {
+                        // 添加成功
+                        this.$message({
+                            type:"success",
+                            message:response.data.message,
+                            showClose:true
+                        })
+
+                    } else {
+                        // 添加失败
+                        this.$message({
+                            type:"error",
+                            message:response.data.message,
+                            showClose:true
+                        })
+                    }
+                })
+
                 // 返回到上一级
                 if (!this.formData.is_classic) {
                     setTimeout(function () {
-                            //window.location.href = "questionBasicList.html";
+                            window.location.href = "questionBasicList.html";
                         }
                         , 1000);
                 } else {
                     setTimeout(function () {
-                        //window.location.href = "questionClassicList.html";
+                        window.location.href = "questionClassicList.html";
                     }, 1000);
                 }
             },
