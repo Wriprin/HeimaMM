@@ -202,11 +202,6 @@
 						if (response.data.flag) {
 							// 查询成功
 							this.courses = response.data.result;
-							this.$message({
-							    type:"success",
-							    message:response.data.message,
-							    showClose:true
-							})
 						} else {
 							// 查询失败
 							this.$message({
@@ -251,79 +246,29 @@
 					console.log("基础题库列表请求参数：");
 					console.log(params);
 
-				  let data = {
-						"flag": true,
-						"message": "获取题目列表成功",
-						"result": {
-							"rows": [
-								{
-									"courseName": "java",
-									"createDate": "2019-08-08 00:00:00.0",
-									"creator": "admin",
-									"difficulty": 4,
-									"id": 11,
-									"number": "",
-									"status": 0,
-									"subject": "<p>反爬虫措施？</p>\r\n",
-									"type": 3,
-									"usedQty": "0"
-								},
-								{
-									"courseName": "java",
-									"createDate": "2019-08-08 00:00:00.0",
-									"creator": "admin",
-									"difficulty": 5,
-									"id": 12,
-									"number": "",
-									"status": 0,
-									"subject": "<p>加入Redis里面有1亿个key，其中10w个key是以某个固定的一直的前缀开头的，如何将他们全部找出来。</p>\r\n",
-									"type": 3,
-									"usedQty": "0"
-								},
-								{
-									"courseName": "java",
-									"createDate": "2019-08-08 00:00:00.0",
-									"creator": "admin",
-									"difficulty": 3,
-									"id": 13,
-									"number": "",
-									"status": 0,
-									"subject": "<p>Redis是多进程还是多线程的，简单描述redis数据库对于线程的管理机制</p>\r\n",
-									"type": 3,
-									"usedQty": "0"
-								},
-								{
-									"courseName": "java",
-									"createDate": "2019-08-08 00:00:00.0",
-									"creator": "admin",
-									"difficulty": 3,
-									"id": 14,
-									"number": "",
-									"status": 0,
-									"subject": "<p>redis相比memcached有哪些优势</p>\r\n",
-									"type": 3,
-									"usedQty": "0"
-								},
-								{
-									"courseName": "java",
-									"createDate": "2019-08-08 00:00:00.0",
-									"creator": "admin",
-									"difficulty": 2,
-									"id": 15,
-									"number": "",
-									"status": 0,
-									"subject": "<p>谈谈对线程池的理解?</p>\r\n",
-									"type": 3,
-									"usedQty": "0"
-								}
-							],
-							"total": 20
-						}
-					}
-					t.pagination.total = data.result.total;
-					t.items = data.result.rows;
-					t.loading = true;
+					// 发送分页查询异步请求
+					axios.post("/question/findByPage.do", params).then(response=>{
+						if (response.data.flag) {
+							// 查询成功
+							this.$message({
+							    type:"success",
+							    message:response.data.message,
+							    showClose:true
+							})
 
+							// 赋值
+							this.pagination.total = response.data.result.total
+							this.items = response.data.result.rows
+
+						} else {
+							// 查询失败
+							this.$message({
+							    type:"error",
+							    message:response.data.message,
+							    showClose:true
+							})
+						}
+					})
 
 				},
 				//清除
@@ -334,6 +279,7 @@
 				},
 				//搜索
 				handleSearch() {
+					this.pagination.pageNum = 1
 					this.getList();
 				},
 				handleSizeChange(val) {
