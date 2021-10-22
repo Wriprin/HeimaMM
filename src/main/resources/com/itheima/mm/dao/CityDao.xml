@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mm.dao.CityDao">
+
+    <!-- 通过 城市名 查询 城市信息 -->
+    <select id="findByCityName" resultType="Dict" parameterType="string">
+        select id, dataValue title from t_dict where dataValue = #{cityName}
+    </select>
+
+    <!-- 通过 fs 的值查询城市（fs = 0 查询所有城市，fs = 1 查询热门城市） -->
+    <select id="findCityList" resultType="Dict" parameterType="string">
+        select id, dataValue title from t_dict where dataType = 1
+        <if test="fs == 1">
+            and dataTag = 1
+        </if>
+    </select>
+</mapper>
