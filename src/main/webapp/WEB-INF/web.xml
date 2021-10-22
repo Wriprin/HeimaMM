@@ -32,7 +32,7 @@
 	<!--2. 配置解决乱码的过滤器-->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
-		<filter-class>com.itheima.mm.filter.CharchaterFilter</filter-class>
+		<filter-class>com.itheima.mm.filter.CharacterEncodingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>

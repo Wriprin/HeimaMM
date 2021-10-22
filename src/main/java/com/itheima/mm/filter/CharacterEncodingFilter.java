@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * 解决全站乱码问题，处理所有的请求
  */
-public class CharchaterFilter implements Filter {
+public class CharacterEncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
