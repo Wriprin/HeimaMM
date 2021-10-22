@@ -26,7 +26,7 @@ Page({
           .baseCitys(data)
           .then(res => {
             _this.setData({
-              cityList: res.data.citys
+              cityList: res.data.result.cities
             })
           })
           .catch(res => {

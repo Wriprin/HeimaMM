@@ -88,11 +88,11 @@ Page({
         app.api
           .baseCitys(data)
           .then(res => {
-            console.log(res.data.citys)
+            console.log(res.data.result.cities)
             _this.setData({
               currentCityID: res.data.result.location.id,
               currentCity: res.data.result.location.title,
-              cityList: res.data.citys
+              cityList: res.data.result.cities
             })
           })
           .catch(res => {
