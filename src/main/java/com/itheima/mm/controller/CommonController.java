@@ -6,6 +6,7 @@ import com.itheima.framework.anno.RequestMapping;
 import com.itheima.mm.entry.Result;
 import com.itheima.mm.pojo.Course;
 import com.itheima.mm.pojo.Dict;
+import com.itheima.mm.pojo.WxMember;
 import com.itheima.mm.service.CityService;
 import com.itheima.mm.service.CourseService;
 import com.itheima.mm.utils.JsonUtils;
@@ -65,8 +66,5 @@ public class CommonController {
             // 查询失败
             JsonUtils.printResult(response, new Result(false, "学科列表查询失败"));
         }
-
-
     }
-
 }
