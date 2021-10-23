@@ -5,7 +5,7 @@ const baseCitys = data => request('post', `/common/cities.do`, data)
 const baseSubjects = data => request('get', '/common/courseList.do', data)
 
 // 用户数据
-const userLogin = data => request('post', '/user/login', data)
+const userLogin = data => request('post', '/wxMember/login.do', data)
 const userCenter = data => request('get', '/user/center', data)
 
 // 面试题数据

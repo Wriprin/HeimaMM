@@ -61,16 +61,27 @@ App({
     if (this.globalData.userInfo) {
       typeof cb == 'function' && cb(this.globalData.userInfo)
     } else {
+      // 此次项目中，我们不适用 加密字串，而是使用 userInfo 作为参数
+      // 然后在服务器端，将 wxMember.id 作为 token 存储
+      // 由于 4 月份，微信官方对 getUserInfo 做了调整，为了节省 BUG 调整时间，所以就将 userInfo 的数据暂时写死
+
       let data = {
-        code: wx.getStorageSync('code') || null,
-        encryptedData: detail.encryptedData,
-        iv: detail.iv
+        // code: wx.getStorageSync('code') || null,
+        // encryptedData: detail.encryptedData,
+        // iv: detail.iv
+        nickName: "Wriprin", // 昵称
+        gender: 1, // 1 男， 0 女
+        language: "zh_CN", // 语言
+        city: "HangZhou", // 城市
+        province: "ZheJiang", // 省份
+        country: "China", // 国家
+        avatarUrl: "http://cdn.jsdelivr.net/gh/Wriprin/Wriprin-Gallery/Gallery/wriprin.jpg" // 头像
       }
       console.log('data => ', data)
       this.api.userLogin(data).then(res => {
         console.log('res => ', res)
-        wx.setStorageSync('token', res.data.token)
-        wx.setStorageSync('userInfo', res.data.userInfo)
+        wx.setStorageSync('token', res.data.result.token)
+        wx.setStorageSync('userInfo', res.data.result.userInfo)
         typeof cb == 'function' && cb()
       })
     }
