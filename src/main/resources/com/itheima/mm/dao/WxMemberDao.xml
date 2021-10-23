@@ -26,9 +26,17 @@
     </select>
 
     <!-- 更新 wxMember -->
+    <!--
+        1. 在做 update table 表中某一个字段时，要考虑是否以后其他字段也会需要修改
+        如果也需要修改，那就直接在此次 update 语句中全部添加进去
+
+   PS: 如果 update table 时，哪个字段的值没有发生变化，sql 是不需要修改该值的，只会修改有变化的值，所以不需要担心每次都会对所有字段执行 update ，造成 sql 臃肿.
+    -->
     <update id="update" parameterType="WxMember">
         update t_wx_member
-        set cityId = #{cityId}, courseId = #{courseId}
+        set nickName = #{nickName}, avatarUrl = #{avatarUrl}, gender = #{gender}, city = #{city}
+        province = #{province}, country = #{country}, language = #{language}, cityId = #{cityId}, courseId = #{courseId}
+        lastCategoryKind = #{lastCategoryKind}, lastCategoryType = #{lastCategoryType}, lastCategoryId = #{lastCategoryId}, lastQuestionId = #{lastQuestionId}
         where id = #{id}
     </update>
 
