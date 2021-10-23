@@ -9,7 +9,7 @@ const userLogin = data => request('post', '/wxMember/login.do', data)
 const userCenter = data => request('get', '/user/center', data)
 
 // 面试题数据
-const questionsConfirm = data => request('post', `/questions/confirm`, data)
+const questionsConfirm = data => request('post', `/wxMember/setCityCourse.do`, data)
 const questionsFavorite = data => request('post', `/questions/favorite/${data.id}`, data)
 const questionsCategorys = data => request('get', `/questions/categorys/${data.categoryKind}/${data.categoryType}`, data)
 const questionsList = data => request('get', `/questions/${data.categoryID}/${data.categoryKind}/${data.categoryType}`, data)
