@@ -111,9 +111,9 @@ Page({
     app.api
       .baseSubjects()
       .then(res => {
-        console.log(res.data)
+        console.log(res.data.result)
         _this.setData({
-          subjectsList: res.data
+          subjectsList: res.data.result
         })
       })
       .catch(res => {
