@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mm.dao.CourseDao">
+    <select id="getCourseList" resultType="Course">
+        <!-- 注意要配置别名才能存储到对应的 course 对象的对应属性 -->
+        select id, name title, ifnull(icon, "") icon from t_course
+    </select>
+</mapper>
