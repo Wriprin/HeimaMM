@@ -31,7 +31,7 @@ public class WxMemberController {
      * 微信用户注册登录
      */
     @RequestMapping("/wxMember/login")
-    public void demo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // 获取请求参数，封装到 wxMember 对象中
             WxMember wxMember = JsonUtils.parseJSON2Object(request, WxMember.class);
@@ -61,6 +61,50 @@ public class WxMemberController {
             e.printStackTrace();
             // 失败
             JsonUtils.printResult(response, new Result(false, "登录失败"));
+        }
+    }
+
+    @RequestMapping("/wxMember/setCityCourse")
+    public void setCityCourse(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            // 接收请求参数
+            Map parameterMap = JsonUtils.parseJSON2Object(request, Map.class);
+            // 后端校验前端传过来的数据，保证无论是什么类型都会被转为 Integer
+            Integer cityId = null;
+            if (parameterMap.get("cityID") instanceof Integer) {
+                cityId = (Integer) parameterMap.get("cityID");
+            } else {
+                cityId = Integer.valueOf((String) parameterMap.get("cityID"));
+            }
+            Integer courseId = null;
+            if (parameterMap.get("subjectID") instanceof Integer) {
+                courseId = (Integer) parameterMap.get("subjectID");
+            } else {
+                courseId = Integer.valueOf((String) parameterMap.get("subjectID"));
+            }
+
+            // 需要 Token 验证，Token 写在请求头 Authorization
+            // Token 中存放的是 wxMember 的 id
+            // 使用 substring() 将 Authorization 请求头中多余的内容 (Bearer 8) 去掉
+            Integer id = Integer.valueOf(request.getHeader("Authorization").substring(7));
+
+            // 调用 业务层，通过 id 查询对应的 wxMember
+            WxMember wxMember = wxMemberService.findById(id);
+
+            // 将 cityId, courseId 存到 wxMember 中
+            wxMember.setCityId(cityId);
+            wxMember.setCourseId(courseId);
+
+            // 调用 业务层，更新 wxMember 中的数据
+            wxMemberService.update(wxMember);
+
+            // 响应
+            JsonUtils.printResult(response, new Result(true, "个性化推荐成功"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 失败
+            JsonUtils.printResult(response, new Result(false, "个性化推荐失败，请稍后再试"));
         }
 
 

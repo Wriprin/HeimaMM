@@ -20,4 +20,17 @@ public interface WxMemberDao {
      * @param wxMember
      */
     void addWxMember(WxMember wxMember);
+
+    /**
+     * 通过 id 查询对应的 wxMember
+     * @param id
+     * @return
+     */
+    WxMember findById(Integer id);
+
+    /**
+     * 更新 wxMember
+     * @param wxMember
+     */
+    void update(WxMember wxMember);
 }

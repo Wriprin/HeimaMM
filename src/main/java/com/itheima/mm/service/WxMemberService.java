@@ -41,4 +41,32 @@ public class WxMemberService {
 
         SqlSessionFactoryUtils.commitAndClose(sqlSession);
     }
+
+    /**
+     * 通过 id 查询对应的 wxMember
+     * @param id
+     * @return
+     */
+    public WxMember findById(Integer id) throws IOException {
+        SqlSession sqlSession = SqlSessionFactoryUtils.openSqlSession();
+        WxMemberDao wxMemberDao = sqlSession.getMapper(WxMemberDao.class);
+
+        WxMember wxMember = wxMemberDao.findById(id);
+
+        SqlSessionFactoryUtils.commitAndClose(sqlSession);
+        return wxMember;
+    }
+
+    /**
+     * 更新 wxMember
+     * @param wxMember
+     */
+    public void update(WxMember wxMember) throws IOException {
+        SqlSession sqlSession = SqlSessionFactoryUtils.openSqlSession();
+        WxMemberDao wxMemberDao = sqlSession.getMapper(WxMemberDao.class);
+
+        wxMemberDao.update(wxMember);
+
+        SqlSessionFactoryUtils.commitAndClose(sqlSession);
+    }
 }
