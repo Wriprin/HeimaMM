@@ -34,8 +34,8 @@
     -->
     <update id="update" parameterType="WxMember">
         update t_wx_member
-        set nickName = #{nickName}, avatarUrl = #{avatarUrl}, gender = #{gender}, city = #{city}
-        province = #{province}, country = #{country}, language = #{language}, cityId = #{cityId}, courseId = #{courseId}
+        set nickName = #{nickName}, avatarUrl = #{avatarUrl}, gender = #{gender}, city = #{city},
+        province = #{province}, country = #{country}, language = #{language}, cityId = #{cityId}, courseId = #{courseId},
         lastCategoryKind = #{lastCategoryKind}, lastCategoryType = #{lastCategoryType}, lastCategoryId = #{lastCategoryId}, lastQuestionId = #{lastQuestionId}
         where id = #{id}
     </update>
