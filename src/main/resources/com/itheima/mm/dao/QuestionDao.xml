@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mm.dao.QuestionDao">
+    <!-- 学科目录 -->
+    <select id="findCategoryByTag" parameterType="map" resultType="map">
+        select id, name title,
+        (select count(*) from t_question where catalogId = c.id) allCount,
+        (select count(*) from tr_member_question where memberId = #{memberId}
+        and questionId in (select id from t_question where catalogId = c.id)) finishedCount
+        from t_catalog c
+        where courseId = #{courseId}
+    </select>
+
+    <!-- 企业目录 -->
+    <select id="findCategoryByCompany" parameterType="map" resultType="map">
+        select id, shortName title,
+        (select count(*) from t_question where companyId = c.id) allCount,
+        (select count(*) from tr_member_question where memberId = #{memberId}
+        and questionId in (select id from t_question where companyId = c.id)) finishedCount
+        from t_company c
+        where cityId = #{cityId}
+    </select>
+</mapper>
