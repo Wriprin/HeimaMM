@@ -10,7 +10,7 @@ Page({
   data: {
     pagetype: '已做',
     questionList: [], //  问题列表
-    currentTypeId: 100, // 当前类型：首页
+    currentTypeId: 101, // 当前类型：首页
     currentKindId: 1, // 默认种类： TAG
     currentTab: 0, // 点击切换索引
     userInfo: {}, //  用户信息
@@ -54,7 +54,7 @@ Page({
       .questionsCategorys(backdata)
       .then(res => {
         _this.setData({
-          questionList: res.data.items
+          questionList: res.data.result
         })
       })
       .catch(res => {
@@ -82,7 +82,7 @@ Page({
       .questionsCategorys(data)
       .then(res => {
         _this.setData({
-          questionList: res.data.items
+          questionList: res.data.result
         })
       })
       .catch(res => {
@@ -108,7 +108,7 @@ Page({
       .questionsCategorys(data)
       .then(res => {
         _this.setData({
-          questionList: res.data.items
+          questionList: res.data.result
         })
       })
       .catch(res => {
